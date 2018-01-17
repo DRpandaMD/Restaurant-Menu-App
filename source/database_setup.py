@@ -2,7 +2,7 @@
 # a database setup python file to create and setup a database
 
 # imports
-from sqlalchemy import Column,ForeignKey,Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -19,9 +19,9 @@ class Restaurant(Base):
 
 
 class MenuItem(Base):
-    __tablename = 'menu_item'
+    __tablename__ = 'menu_item'
     name = Column(String(80), nullable=False)
-    id = Column(Integer, nullable=False)
+    id = Column(Integer, primary_key=True)
     course = Column(String(250))
     description = Column(String(250))
     price = Column(String(8))
@@ -42,4 +42,4 @@ class MenuItem(Base):
 
 # this part will always get inserted at EOF #
 engine = create_engine('sqlite:///restaurant_menu.db')
-Base.metadta.create_all(engine)
+Base.metadata.create_all(engine)
