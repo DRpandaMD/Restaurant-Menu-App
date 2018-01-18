@@ -29,25 +29,19 @@ def restaurant_default():
 # Create a new restaurant
 @app.route('/restaurants/new/')
 def restaurant_new():
-    output = ""
-    output += "Here is the New Restaurant Page"
-    return output
+    return render_template('create_restaurants.html')
 
 
 # Edit a existing restaurant
 @app.route('/restaurants/<int:restaurant_id>/edit/')
 def restaurant_edit(restaurant_id):
-    output = ""
-    output += "Here is the Edit Restaurant Page"
-    return output
+    return render_template('edit_restaurants.html')
 
 
 # Delete a specified restaurant
 @app.route('/restaurants/<int:restaurant_id>/delete/')
 def restaurant_delete(restaurant_id):
-    output = ""
-    output += "Here is the Delete Restaurant Page"
-    return output
+    return render_template('delete_restaurants.html')
 
 
 # show a specific restaurant's menu
