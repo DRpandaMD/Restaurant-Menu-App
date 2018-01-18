@@ -22,9 +22,8 @@ session = DBSession()
 @app.route('/')
 @app.route('/restaurants/')
 def restaurant_default():
-    output = ""
-    output += "Here is the Default Landing Page"
-    return output
+    # returns will now call render_template() to render html files found in /templates/
+    return render_template('restaurants.html')
 
 
 # Create a new restaurant
