@@ -48,33 +48,25 @@ def restaurant_delete(restaurant_id):
 @app.route('/restaurants/<int:restaurant_id>/menu/')
 @app.route('/restaurants/<int:restaurant_id>/')
 def restaurant_show_menu(restaurant_id):
-    output = ""
-    output += "Here is the Menu for 'x' Restaurant Page"
-    return output
+    return render_template('show_menu.html')
 
 
 # add a new menu item to restaurant
 @app.route('/restaurants/<int:restaurant_id>/menu/new/')
 def restaurant_new_menu_item(restaurant_id):
-    output = ""
-    output += "Here is the new menu item for 'x' Restaurant Page"
-    return output
+    return render_template("create_menu_item.html")
 
 
 # add a edit menu item to restaurant
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/')
 def restaurant_edit_menu_item(restaurant_id, menu_id):
-    output = ""
-    output += "Here is the edit menu item for 'x' Restaurant Page"
-    return output
+    return render_template('edit_menu_item.html')
 
 
 # add a edit menu item to restaurant
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/')
 def restaurant_delete_menu_item(restaurant_id, menu_id):
-    output = ""
-    output += "Here is the delete menu item for 'x' Restaurant Page"
-    return output
+    return render_template('delete_menu_item.html')
 
 
 # App Start
