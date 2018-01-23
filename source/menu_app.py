@@ -78,16 +78,35 @@ def restaurant_show_menu(restaurant_id):
 # add a new menu item to restaurant
 @app.route('/restaurants/<int:restaurant_id>/menu/new/', methods=['GET', 'POST'])
 def restaurant_new_menu_item(restaurant_id):
-    return render_template("create_menu_item.html")
+    if request.method == 'POST':
+        newMenuItem= MenuItem(name=request.form['name'], course=request.form['course'],
+                              description=request.form['description'], price=request.form['price'],
+                              restaurant_id=restaurant_id)
+        session.add(newMenuItem)
+        session.commit()
+        return redirect(url_for('restaurant_default'))
+    else:
+        return render_template("create_menu_item.html", restaurant_id=restaurant_id)
 
 
-# add a edit menu item to restaurant
+# edit menu item to restaurant
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/')
-def restaurant_edit_menu_item(restaurant_id):
-    return render_template('edit_menu_item.html')
+def restaurant_edit_menu_item(restaurant_id, menu_id):
+    edited_item = session.query(MenuItem).filter_by(id=menu_id).one()
+    if request.method == 'POST':
+        if request.form['name'] & request.form['course'] & request.form['description'] & request.form['price']:
+            edited_item.name = request.form['name']
+            edited_item.course = request.form['course']
+            edited_item.description = request.form['description']
+            edited_item.price = request.form['price']
+        session.add(edited_item)
+        session.commit()
+        return redirect(url_for(restaurant_default, restaurant_id=restaurant_id))
+    else:
+        return render_template('edit_menu_item.html', restaurant_id=restaurant_id, menu_id=menu_id, item=edited_item)
 
 
-# add a edit menu item to restaurant
+# delete a menu item from a restaurant
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/')
 def restaurant_delete_menu_item(restaurant_id, menu_id):
     return render_template('delete_menu_item.html')

@@ -12,12 +12,13 @@
         {% for i in menuItems %}
             <div>
                 <h3>{{ i.name }}</h3>
+                <p>{{ i.course }}</p>
                 <p>{{ i.description }}</p>
                 <p>{{ i.price }}</p>
                 <br>
-                <a href="{{ url_for('restaurant_edit', restaurant_id = i.id) }}">Edit {{ i.name }}</a>
+                <a href="{{ url_for('restaurant_edit_menu_item', restaurant_id = restaurant.id, menu_id = i.id) }}">Edit {{ i.name }}</a>
                 <br>
-                <a href="{{ url_for('restaurant_delete', restaurant_id = i.id) }}">Delete {{ i.name }}</a>
+                <a href="{{ url_for('restaurant_delete_menu_item', restaurant_id = restaurant.id, menu_id = i.id) }}">Delete {{ i.name }}</a>
             </div>
         {% endfor %}
     </div>
