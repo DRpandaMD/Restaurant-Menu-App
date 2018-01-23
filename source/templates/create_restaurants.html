@@ -6,12 +6,12 @@
 </head>
 <body>
 <div class="content">
-    <h1>Create Restaurant Page</h1>
-    <form action="#" method="post">
+    <h1>Create a New Restaurant to track</h1>
+    <form action="{{ url_for('restaurant_new') }}" method="POST">
         <p>Name:</p>
         <input type="text" size="30" name="name" placeholder="Name">
         <input type="submit" value="Create">
-        <a href="#">Cancel</a>
+        <a href="{{ url_for('restaurant_default') }}">Cancel</a>
     </form>
 </div>
 

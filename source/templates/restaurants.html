@@ -7,11 +7,17 @@
 <body>
     <div class="content">
         <h1>Welcome to the Restaurant App</h1>
-        <h3>Test Restaurant</h3>
-        <a href="#"> View Menu</a>
-        <a href="#">Create new Restaurant</a>
-        <a href="#">Edit Restaurant</a>
-        <a href="#">Delete Restaurant</a>
+        <a href="{{ url_for('restaurant_new', restaurant_id = restaurant.id) }}">Create new Restaurant</a>
+        <br>
+        {% for r in restaurant %}
+            <div>
+                <h3>{{r.name}}</h3>
+                <a href="{{ url_for('restaurant_show_menu', restaurant_id = r.id) }}"> View Menu</a>
+                <p>{{r.id}}</p>
+                <a href="{{ url_for('restaurant_edit', restaurant_id = r.id) }}">Edit Restaurant</a>
+                <a href="{{ url_for('restaurant_delete', restaurant_id = r.id) }}">Delete Restaurant</a>
+            </div>
+        {% endfor %}
     </div>
 
 </body>

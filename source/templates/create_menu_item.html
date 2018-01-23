@@ -5,12 +5,12 @@
     <title>RestaurantApp</title>
 </head>
 <body>
-<h1>Create Menu Item Page</h1>
-    <form action="#" method="post">
+<h1>Create a new Menu Item</h1>
+    <form action="{{ url_for('restaurant_new_menu_item', restaurant_id = restaurant_id) }}" method="post">
         <p>Name:</p>
         <input type="text" size="30" name="name" placeholder="Name">
         <input type="submit" value="Create">
-        <a href="#">Cancel</a>
+        <a href="{{ url_for('restaurant_default') }}">Cancel</a>
     </form>
 
 </body>
