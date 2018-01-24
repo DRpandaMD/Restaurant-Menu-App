@@ -47,7 +47,7 @@ def restaurant_edit(restaurant_id):
         # we want to ensure that the field is filled out
         if request.form['name']:
             editedRestaurant.name = request.form['name']
-        session.add(editedRestaurant)
+        session.update(editedRestaurant)
         session.commit()
         return redirect(url_for('restaurant_default'))
     else:
@@ -90,7 +90,7 @@ def restaurant_new_menu_item(restaurant_id):
 
 
 # edit menu item to restaurant
-@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/')
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/', methods=['GET', 'POST'])
 def restaurant_edit_menu_item(restaurant_id, menu_id):
     edited_item = session.query(MenuItem).filter_by(id=menu_id).one()
     if request.method == 'POST':
@@ -99,17 +99,24 @@ def restaurant_edit_menu_item(restaurant_id, menu_id):
             edited_item.course = request.form['course']
             edited_item.description = request.form['description']
             edited_item.price = request.form['price']
-        session.add(edited_item)
-        session.commit()
-        return redirect(url_for(restaurant_default, restaurant_id=restaurant_id))
+            edited_item.id = menu_id
+            session.add(edited_item)
+            session.commit()
+        return redirect(url_for('restaurant_default', restaurant_id=restaurant_id))
     else:
         return render_template('edit_menu_item.html', restaurant_id=restaurant_id, menu_id=menu_id, item=edited_item)
 
 
 # delete a menu item from a restaurant
-@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/')
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/', methods=['GET', 'POST'])
 def restaurant_delete_menu_item(restaurant_id, menu_id):
-    return render_template('delete_menu_item.html')
+    item_to_delete = session.query(MenuItem).filter_by(id=menu_id).one()
+    if request.method == 'POST':
+        session.delete(item_to_delete)
+        session.commit()
+        return redirect(url_for('restaurant_default', restaurant_id=restaurant_id))
+    else:
+        return render_template('delete_menu_item.html', restaurant_id=restaurant_id, menu_id=menu_id, item=item_to_delete)
 
 
 # App Start

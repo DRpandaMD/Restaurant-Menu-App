@@ -9,15 +9,11 @@
     <h1>Edit {{ item.name }}</h1>
     <div>
         <form action="{{ url_for('restaurant_new_menu_item', restaurant_id = restaurant_id, menu_id = menu_id) }}" method="POST">
-            <p>Name:</p>
-            <input type="text" size="30" name="name" placeholder="{{ item.name }}">
-            <br>
-            <input type="text" size="30" name="course" placeholder="{{ item.course }}">
-            <br>
-            <input type="text" size="30" name="description" placeholder="{{ item.description }}">
-            <br>
-            <input type="text" size="8" name="price" placeholder="{{ item.price }}">
-            <input type="submit" value="Create">
+            <p>Name: <input type="text" size="30" name="name" placeholder="{{ item.name }}"> </p>
+            <p>Course: <input type="text" size="30" name="course" placeholder="{{ item.course }}"></p>
+            <p>Description: <input type="text" size="30" name="description" placeholder="{{ item.description }}"></p>
+            <p>Price: <input type="text" size="8" name="price" placeholder="{{ item.price }}"></p>
+            <input type="submit" value="Edit">
             <a href="{{ url_for('restaurant_default') }}">Cancel</a>
         </form>
     </div>
