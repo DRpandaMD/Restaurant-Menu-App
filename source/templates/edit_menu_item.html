@@ -8,7 +8,7 @@
 <div class="content">
     <h1>Edit {{ item.name }}</h1>
     <div>
-        <form action="{{ url_for('restaurant_new_menu_item', restaurant_id = restaurant_id, menu_id = menu_id) }}" method="POST">
+        <form action="{{ url_for('restaurant_edit_menu_item', restaurant_id = restaurant_id, menu_id = menu_id) }}" method="POST">
             <p>Name: <input type="text" size="30" name="name" placeholder="{{ item.name }}"> </p>
             <p>Course: <input type="text" size="30" name="course" placeholder="{{ item.course }}"></p>
             <p>Description: <input type="text" size="30" name="description" placeholder="{{ item.description }}"></p>
