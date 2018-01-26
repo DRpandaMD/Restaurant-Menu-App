@@ -11,11 +11,20 @@ from sqlalchemy import create_engine
 # Lets make the Base class
 Base = declarative_base()
 
+
 # Now we are going to make two separate classes that represent the two separate tables in the DB
 class Restaurant(Base):
     __tablename__ = 'restaurant'
     name = Column(String(80), nullable=False)
     id = Column(Integer, primary_key=True)
+
+    # I also need to make a JSON serialize property / function here
+    @property
+    def serialize(self):
+        return {
+            'name': self.name,
+            'id': self.id
+        }
 
 
 class MenuItem(Base):

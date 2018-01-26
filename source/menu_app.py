@@ -17,6 +17,27 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
+# JSON API Endpoint Block #
+# JSON API call to view all restaurants
+@app.route('/restaurants/JSON/')
+def get_restaurants_JSON():
+    restaurants = session.query(Restaurant).all()
+    return jsonify(restaurants=[r.serialize for r in restaurants])
+
+
+# JSON API Call to pull ALL the menu items from a given restaurant id
+@app.route('/restaurants/<int:restaurant_id>/menu/JSON/')
+def get_menu_item_list_JSON(restaurant_id):
+    items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id).all()
+    return jsonify(MenuItems=[i.serialize for i in items])
+
+
+# JSON API call to pull a single menu item by the given id
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON/')
+def get_single_menu_item_JSON(restaurant_id, menu_id):
+    single_menu_id = session.query(MenuItem).filter_by(id=menu_id).one()
+    return jsonify(single_menu_id=single_menu_id.serialize)
+
 # ROUTING #
 # display all restaurants and root
 @app.route('/')
