@@ -11,5 +11,5 @@ To run this locally:
 * And [SQLAlchemy](https://www.sqlalchemy.org/)
 
 
-###Styling Concerns
+### Styling Concerns
 Significant effort will be made at some point in time to add either Bootstrap or React as a front end.
