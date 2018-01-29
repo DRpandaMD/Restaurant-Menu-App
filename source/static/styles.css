@@ -11,3 +11,8 @@ body {
     font-family: Impact, Charcoal, sans-serif;
     background-color: #b3b3b3;
 }
+
+p,
+a {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
